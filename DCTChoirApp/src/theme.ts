@@ -1,0 +1,26 @@
+export const colors = {
+  primary: '#5B4FCF',
+  primaryLight: '#EEF0FF',
+  secondary: '#1D9E75',
+  chorusBlock: '#E8F5F0',
+  chorusBlockDark: '#0D2E25',
+  background: '#FFFFFF',
+  backgroundDark: '#0F0F0F',
+  surface: '#F5F5F5',
+  surfaceDark: '#1C1C1E',
+  text: '#1A1A1A',
+  textDark: '#F2F2F2',
+  textMuted: '#6B6B6B',
+  textMutedDark: '#9A9A9A',
+  border: '#E0E0E0',
+  borderDark: '#2C2C2E',
+  danger: '#E24B4A',
+  chorusBadge: '#1D9E75',
+  badge: {
+    french: '#D4537E',
+    zulu: '#639922',
+    swahili: '#BA7517',
+    lingala: '#378ADD',
+    mixed: '#7F77DD',
+  }
+};

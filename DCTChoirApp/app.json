@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "DCT Choir",
+    "slug": "dct-choir",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#5B4FCF"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dctchoir.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#5B4FCF"
+      },
+      "package": "com.dctchoir.app",
+      "versionCode": 1
+    }
+  }
+}
