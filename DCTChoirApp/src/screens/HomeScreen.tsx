@@ -76,8 +76,8 @@ const filteredSongs = useMemo(() => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>DCT Choir</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-          <Ionicons name="settings-outline" size={24} color={colors.text} />
+        <TouchableOpacity onPress={() => navigation.navigate('SettingsTab')}>
+          <Icon name="settings-outline" size={24} color={colors.text} />
         </TouchableOpacity>
       </View>
       <TypeFilter selected={selectedType} onSelect={(type) => setSelectedType(type as 'song' | 'chorus')} />

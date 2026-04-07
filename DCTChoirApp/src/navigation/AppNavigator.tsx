@@ -1,7 +1,6 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { colors } from '../theme';
 
@@ -14,7 +13,7 @@ import { SetlistScreen } from '../screens/SetlistScreen';
 import { SettingsScreen } from '../screens/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const HomeStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -30,37 +29,36 @@ const SearchStack = () => (
   </Stack.Navigator>
 );
 
-export const AppNavigator: React.FC = () => {
+interface AppNavigatorProps {
+  isDark: boolean;
+}
+
+export default function AppNavigator({ isDark }: AppNavigatorProps) {
+  const bg = isDark ? colors.backgroundDark : colors.background;
+  const fg = isDark ? colors.textDark : colors.text;
+  const surface = isDark ? colors.surfaceDark : colors.surface;
+  const borderColor = isDark ? colors.borderDark : colors.border;
+  const inactiveTint = isDark ? colors.textMutedDark : colors.textMuted;
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          headerShown: false,
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName: any;
-
-            if (route.name === 'HomeTab') {
-              iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'SearchTab') {
-              iconName = focused ? 'search' : 'search-outline';
-            } else if (route.name === 'FavouritesTab') {
-              iconName = focused ? 'heart' : 'heart-outline';
-            } else if (route.name === 'SetlistTab') {
-              iconName = focused ? 'list' : 'list-outline';
-            } else if (route.name === 'SettingsTab') {
-              iconName = focused ? 'settings' : 'settings-outline';
-            }
-
-<Icon name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: colors.primary,
-          tabBarInactiveTintColor: colors.textMuted,
-          tabBarStyle: {
-            backgroundColor: colors.surface,
-            borderTopColor: colors.border,
-          },
-        })}
-      >
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarIcon: ({ focused, color, size }) => {
+          const icons: Record<string, [string, string]> = {
+            HomeTab:      ['home', 'home-outline'],
+            SearchTab:    ['search', 'search-outline'],
+            FavouritesTab:['heart', 'heart-outline'],
+            SetlistTab:   ['list', 'list-outline'],
+            SettingsTab:  ['settings', 'settings-outline'],
+          };
+          const [active, inactive] = icons[route.name] ?? ['help', 'help-outline'];
+          return <Icon name={focused ? active : inactive} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: inactiveTint,
+        tabBarStyle: { backgroundColor: bg, borderTopColor: borderColor },
+      })}
+    >
         <Tab.Screen
           name="HomeTab"
           component={HomeStack}
