@@ -8,7 +8,7 @@ import { useSetlistStore } from '../store/setlistStore';
 import { SongCard } from '../components/SongCard';
 import { ChorusCard } from '../components/ChorusCard';
 import { EmptyState } from '../components/EmptyState';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const SetlistScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -63,7 +63,6 @@ export const SetlistScreen: React.FC = () => {
           <View style={styles.dragHandle}>
             <Ionicons name="menu" size={20} color={colors.textMuted} />
           </View>
-          <Text style={styles.chorusIcon}>♪</Text>
           <View style={styles.cardContainer}>
             <ChorusCard
               chorus={item}
@@ -108,7 +107,7 @@ export const SetlistScreen: React.FC = () => {
         data={entries}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        onDragEnd={({ data }) => reorder(data.map((_, i) => i), data.map((_, i) => i))}
+        onDragEnd={({ from, to }) => reorder(from, to)}
         getItemLayout={(data, index) => ({ length: 72, offset: 72 * index, index })}
         ListEmptyComponent={
           <EmptyState

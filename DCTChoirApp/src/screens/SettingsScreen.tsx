@@ -4,7 +4,7 @@ import { useSettingsStore } from '../store/settingsStore';
 import { useBookmarkStore } from '../store/bookmarkStore';
 import { useSetlistStore } from '../store/setlistStore';
 import { colors } from '../theme';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const SettingsScreen: React.FC = () => {
   const { fontSize, theme, setFontSize, setTheme } = useSettingsStore();

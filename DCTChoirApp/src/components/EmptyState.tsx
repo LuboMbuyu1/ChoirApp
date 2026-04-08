@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '../theme';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 interface EmptyStateProps {
   icon?: string;
@@ -16,7 +16,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-<Icon name={icon as any} size={64} color={colors.textMuted} />
+      <Ionicons name={icon as any} size={64} color={colors.textMuted} />
 
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.message}>{message}</Text>

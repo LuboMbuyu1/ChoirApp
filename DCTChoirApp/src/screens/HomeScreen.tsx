@@ -9,13 +9,13 @@ import { ChorusCard } from '../components/ChorusCard';
 import { TypeFilter } from '../components/TypeFilter';
 import { CategoryFilter } from '../components/CategoryFilter';
 import { EmptyState } from '../components/EmptyState';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { songsData } from '../utils/songs';
 import type { HomeScreenProps } from '../types/navigation';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export const HomeScreen: React.FC = () => {
-const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+const navigation = useNavigation<any>();
   const { isBookmarked, addBookmark, removeBookmark } = useBookmarkStore();
   const [selectedType, setSelectedType] = useState<'song' | 'chorus'>('song');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -77,7 +77,7 @@ const filteredSongs = useMemo(() => {
       <View style={styles.header}>
         <Text style={styles.title}>DCT Choir</Text>
         <TouchableOpacity onPress={() => navigation.navigate('SettingsTab')}>
-          <Icon name="settings-outline" size={24} color={colors.text} />
+          <Ionicons name="settings-outline" size={24} color={colors.text} />
         </TouchableOpacity>
       </View>
       <TypeFilter selected={selectedType} onSelect={(type) => setSelectedType(type as 'song' | 'chorus')} />

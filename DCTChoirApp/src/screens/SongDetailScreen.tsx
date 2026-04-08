@@ -1,30 +1,31 @@
 import React, { useMemo, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Share } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { useKeepAwake } from 'expo-keep-awake';
+import KeepAwake from 'react-native-keep-awake';
 import { SongEntry } from '../types';
 import { colors } from '../theme';
 import { useSettingsStore } from '../store/settingsStore';
 import { useBookmarkStore } from '../store/bookmarkStore';
 import { useSetlistStore } from '../store/setlistStore';
 import { LyricsDisplay } from '../components/LyricsDisplay';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { songsData } from '../utils/songs';
-import type { SongDetailScreenProps } from '../types/navigation';
+import type { SongDetailScreenProps, RootStackParamList } from '../types/navigation';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RouteProp } from '@react-navigation/native';
 
 export const SongDetailScreen: React.FC = () => {
-const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-const route = useRoute<RouteProp<RootStackParamList, 'SongDetail'>>();
-const { song } = route.params;
-  const route = useRoute();
-  const { song }: { song: SongEntry } = route.params as any;
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const route = useRoute<RouteProp<RootStackParamList, 'SongDetail'>>();
+  const { song } = route.params;
   const { fontSize } = useSettingsStore();
   const { isBookmarked, addBookmark, removeBookmark } = useBookmarkStore();
   const { addEntry } = useSetlistStore();
 
-  useKeepAwake();
+  useEffect(() => {
+    KeepAwake.activate();
+    return () => KeepAwake.deactivate();
+  }, []);
 
   const fontSizeMap = {
     small: 16,
@@ -58,7 +59,7 @@ const sameTypeSongs = useMemo(() => {
 
   const handleShare = async () => {
     try {
-      const message = `${song.title}${song.number ? ` (${song.number})` : ''}\n\n${song.type === 'song' ? song.verses.map(v => `Verse ${v.number}:\n${v.text}`).join('\n\n') + (song.chorus ? `\n\nChorus:\n${song.chorus}` : '') : song.chorusText}`;
+      const message = `${song.title}${song.number ? ` (${song.number})` : ''}\n\n${song.type === 'song' ? song.verses.map((v: any) => `Verse ${v.number}:\n${v.text}`).join('\n\n') + (song.chorus ? `\n\nChorus:\n${song.chorus}` : '') : song.chorusText}`;
       await Share.share({ message });
     } catch (error) {
       Alert.alert('Error', 'Failed to share');

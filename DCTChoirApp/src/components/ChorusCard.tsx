@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { SongEntry } from '../types';
 import { colors } from '../theme';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 interface ChorusCardProps {
   chorus: SongEntry;
@@ -42,7 +42,7 @@ export const ChorusCard: React.FC<ChorusCardProps> = ({
         )}
       </View>
       <TouchableOpacity onPress={onBookmarkToggle} style={styles.right}>
-<Icon
+        <Ionicons
           name={isBookmarked ? 'heart' : 'heart-outline'}
           size={24}
           color={isBookmarked ? colors.danger : colors.textMuted}
